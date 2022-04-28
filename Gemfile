@@ -64,3 +64,6 @@ gem 'net-smtp'
 
 # エラー `require': cannot load such file -- net/pop (LoadError) への対応
 gem 'net-pop'
+
+# エラー `require': cannot load such file -- net/imap (LoadError) への対応
+gem 'net-imap'
