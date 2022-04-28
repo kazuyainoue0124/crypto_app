@@ -58,3 +58,6 @@ gem 'dotenv-rails'
 
 # エラー Psych::BadAlias: Unknown alias: default への対応
 gem 'psych', '~> 3.1'
+
+# エラー `require': cannot load such file -- net/smtp (LoadError) への対応
+gem 'net-smtp'
