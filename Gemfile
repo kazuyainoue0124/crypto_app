@@ -61,3 +61,6 @@ gem 'psych', '~> 3.1'
 
 # エラー `require': cannot load such file -- net/smtp (LoadError) への対応
 gem 'net-smtp'
+
+# エラー `require': cannot load such file -- net/pop (LoadError) への対応
+gem 'net-pop'
