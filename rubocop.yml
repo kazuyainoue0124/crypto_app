@@ -1,0 +1,10 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+
+##################### Style ##################################
+
+# 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
