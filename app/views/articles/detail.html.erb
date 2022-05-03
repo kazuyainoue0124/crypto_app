@@ -1,0 +1,8 @@
+<% @title_elements.zip(@time_elements) do |title, time| %>
+<h1><%= title.inner_text %></h1>
+<p><%= time.inner_text %></p>
+<% @contents_elements.each do |content| %>
+<p><%= content.inner_text %></p>
+<% end %>
+<% end %>
+<%= link_to "原文へ", "https://www.theblockcrypto.com#{@url}" %>

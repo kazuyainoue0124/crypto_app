@@ -1,0 +1,15 @@
+<h1>Crypto App for Portfolio</h1>
+<p>
+海外の仮想通貨情報を日本語で閲覧できるサービスです。コメント・ブックマーク・いいね！機能を搭載しているため、ユーザー間の知見を共有できます。
+</p>
+
+<% @title_elements.zip(@lead_elements, @time_elements, @url_elements) do |title,lead, time, url| %>
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= title.inner_text %></h5>
+    <p class="card-text"><%= lead.inner_text %></p>
+    <p class="card-text"><small class="text-muted"><%= time.inner_text %></small></p>
+    <%= link_to "続きを読む", articles_detail_path(url: url.get_attribute(:href)), {class: "btn btn-primary"} %>
+  </div>
+</div>
+<% end %>
