@@ -1,10 +1,13 @@
-<h1>Crypto App for Portfolio</h1>
-<p>
-海外の仮想通貨情報を日本語で閲覧できるサービスです。コメント・ブックマーク・いいね！機能を搭載しているため、ユーザー間の知見を共有できます。
-</p>
+<div class="mb-3 w-75 mx-auto">
+  <h1 class="text-center">Crypto App for Portfolio</h1>
+  <p>
+  海外の仮想通貨情報を日本語で閲覧できるサービスです。コメント・ブックマーク・いいね！機能を搭載しているため、ユーザー間の知見を共有できます。
+  </p>
+</div>
+
 
 <% @title_elements.zip(@lead_elements, @time_elements, @url_elements) do |title,lead, time, url| %>
-<div class="card mb-3">
+<div class="card mb-3 w-75 mx-auto">
   <div class="card-body">
     <h5 class="card-title"><%= title.inner_text %></h5>
     <p class="card-text"><%= lead.inner_text %></p>
