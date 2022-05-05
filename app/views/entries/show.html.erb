@@ -1,0 +1,11 @@
+<% provide(:title, @entry.title) %>
+
+<h3><%= link_to @entry.title, @entry.url %></h3>
+<i>published on <%= @entry.published %> </i>
+<p>
+<%
+=begin%>
+ <%= @entry.content.html_safe %> 
+<%
+=end%>
+</p>

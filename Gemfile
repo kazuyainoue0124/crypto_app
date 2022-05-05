@@ -72,3 +72,10 @@ gem 'net-pop'
 
 # エラー `require': cannot load such file -- net/imap (LoadError) への対応
 gem 'net-imap'
+
+# 仮データ
+gem 'seed-fu'
+
+# rss
+gem 'feedjira'
+gem 'httparty'
