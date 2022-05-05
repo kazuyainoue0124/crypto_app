@@ -18,3 +18,4 @@ class ArticlesController < ApplicationController
     @contents_elements = page.search('div.articleContent div p')
   end
 end
+
