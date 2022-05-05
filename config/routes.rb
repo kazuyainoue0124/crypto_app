@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
-  get 'users/new'
-  root 'articles#index'
-  get 'articles/detail', to: 'articles#detail'
+  root 'entries#index'
+  get 'entries/index'
+  get 'entries/show'
   get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
-  get '/signup',   to: 'users#new'
-  resources :users
+
+  # resources :feeds do
+  #   member do
+  #     resources :entries, only: [:index, :show]
+  #   end
+  # end
+
+  resources :entries
 end

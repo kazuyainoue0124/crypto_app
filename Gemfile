@@ -73,8 +73,9 @@ gem 'net-pop'
 # エラー `require': cannot load such file -- net/imap (LoadError) への対応
 gem 'net-imap'
 
-# スクレイピング用のgem
-gem 'mechanize'
+# 仮データ
+gem 'seed-fu'
 
-# パスワードをハッシュ化
-gem 'bcrypt', '3.1.13'
+# rss
+gem 'feedjira'
+gem 'httparty'
