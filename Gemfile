@@ -79,3 +79,6 @@ gem 'seed-fu'
 # rss
 gem 'feedjira'
 gem 'httparty'
+
+# rssタスクの更新
+gem 'whenever', require: false
