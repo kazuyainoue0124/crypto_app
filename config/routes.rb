@@ -5,12 +5,9 @@ Rails.application.routes.draw do
   get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
   get  '/signup',  to: 'users#new'
-
-  # resources :feeds do
-  #   member do
-  #     resources :entries, only: [:index, :show]
-  #   end
-  # end
+  get '/login',    to: 'sessions#new'
+  post '/login',   to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   resources :entries
   resources :users
