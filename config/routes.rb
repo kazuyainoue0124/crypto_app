@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'entries/show'
   get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
+  get  '/signup',  to: 'users#new'
 
   # resources :feeds do
   #   member do
@@ -12,4 +13,5 @@ Rails.application.routes.draw do
   # end
 
   resources :entries
+  resources :users
 end

@@ -1,9 +1,65 @@
 <% provide(:title, "ホーム") %>
+<% @entries.each_slice(3) do |entry1, entry2, entry3| %>
 
-<% @entries.each do |entry| %>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <%
+=begin%>
+ <img src="..." class="card-img-top" alt="..."> 
+<%
+=end%>
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to entry1.title, entry1 %></h5>
+        <p class="card-text"><i> <%= link_to entry1.feed.name, entry1.feed.url %> </i></p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><i> published <%= time_ago_in_words(entry1.published) %> ago.</i></small>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <%
+=begin%>
+ <img src="..." class="card-img-top" alt="..."> 
+<%
+=end%>
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to entry2.title, entry2 %></h5>
+        <p class="card-text"><i> <%= link_to entry2.feed.name, entry2.feed.url %> </i></p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><i> published <%= time_ago_in_words(entry2.published) %> ago.</i></small>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <%
+=begin%>
+ <img src="..." class="card-img-top" alt="..."> 
+<%
+=end%>
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to entry3.title, entry3 %></h5>
+        <p class="card-text"><i> <%= link_to entry3.feed.name, entry3.feed.url %> </i></p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><i> published <%= time_ago_in_words(entry3.published) %> ago.</i></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%
+=begin%>
+ 
 <div class="panel panel-default">
   <div class="panel-body">
     <%= link_to entry.title, entry %> - <i> published <%= time_ago_in_words(entry.published) %> ago.</i> - <i> <%= link_to entry.feed.name, entry.feed.url %> </i>
   </div>
-</div>
+</div> 
+<%
+=end%>
 <% end %>
