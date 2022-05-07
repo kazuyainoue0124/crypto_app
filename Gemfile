@@ -82,3 +82,6 @@ gem 'httparty'
 
 # rssタスクの更新
 gem 'whenever', require: false
+
+# ページネーション
+gem 'pagy'

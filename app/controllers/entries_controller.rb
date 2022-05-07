@@ -1,8 +1,9 @@
 class EntriesController < ApplicationController
+  include Pagy::Backend
   before_action :set_entries, only: :index
 
   def index
-    @entries = @entries.order('published desc')
+    @pagy, @entries = pagy(@entries.order('published desc'), items: 9)
   end
 
   def show
