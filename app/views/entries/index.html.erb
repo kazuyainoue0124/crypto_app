@@ -4,11 +4,6 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col">
     <div class="card h-100">
-      <%
-=begin%>
- <img src="..." class="card-img-top" alt="..."> 
-<%
-=end%>
       <div class="card-body">
         <h5 class="card-title"><%= link_to entry1.title, entry1 %></h5>
         <p class="card-text"><i> <%= link_to entry1.feed.name, entry1.feed.url %> </i></p>
@@ -20,11 +15,6 @@
   </div>
   <div class="col">
     <div class="card h-100">
-      <%
-=begin%>
- <img src="..." class="card-img-top" alt="..."> 
-<%
-=end%>
       <div class="card-body">
         <h5 class="card-title"><%= link_to entry2.title, entry2 %></h5>
         <p class="card-text"><i> <%= link_to entry2.feed.name, entry2.feed.url %> </i></p>
@@ -35,26 +25,17 @@
     </div>
   </div>
   <div class="col">
-    <div class="card h-100">
-      <%
-=begin%>
- <img src="..." class="card-img-top" alt="..."> 
-<%
-=end%>
-      <%
-=begin%>
- <div class="card-body">
-        <h5 class="card-title"><%= link_to entry3.title, entry3 %></h5>
-        <p class="card-text"><i> <%= link_to entry3.feed.name, entry3.feed.url %> </i></p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted"><i> published <%= time_ago_in_words(entry3.published) %> ago.</i></small>
-      </div>
+  <div class="card h-100">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to entry3.title, entry3 %></h5>
+      <p class="card-text"><i> <%= link_to entry3.feed.name, entry3.feed.url %> </i></p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"><i> published <%= time_ago_in_words(entry3.published) %> ago.</i></small>
     </div>
   </div>
-</div> 
-<%
-=end%>
+</div>
+</div>
 
 <%
 =begin%>
