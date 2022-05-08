@@ -1,0 +1,15 @@
+<div class="col">
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= user.name %></h5>
+      <p class="card-text"><%= user.profile %></p>
+      <%= link_to "ユーザー詳細へ", user, class: "btn btn-primary" %>
+      <% if current_user.admin? && !current_user?(user) %>
+        <%= link_to "削除", user, method: :delete, data: { confirm: "このユーザーを削除しますか？"}, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

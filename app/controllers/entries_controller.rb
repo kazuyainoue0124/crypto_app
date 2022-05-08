@@ -1,5 +1,4 @@
 class EntriesController < ApplicationController
-  include Pagy::Backend
   before_action :set_entries, only: :index
 
   def index
