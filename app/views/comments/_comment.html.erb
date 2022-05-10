@@ -1,0 +1,9 @@
+
+<li id="micropost-<%= comment.id %>">
+  <span class="entry"><%= link_to comment.entry.title, comment.entry %></span>
+  <span class="user"><%= link_to comment.user.name, comment.user %></span>
+  <span class="content"><%= comment.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(comment.created_at) %> ago.
+  </span>
+</li>

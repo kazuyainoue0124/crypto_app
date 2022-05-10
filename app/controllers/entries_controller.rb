@@ -7,6 +7,8 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
+    @comments = @entry.comments.all  # ここを修正すべき
+
   end
 
    private

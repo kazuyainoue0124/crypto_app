@@ -2,10 +2,15 @@
 
 <h3><%= link_to @entry.title, @entry.url %></h3>
 <i>published on <%= @entry.published %> </i>
-<p>
-<%
-=begin%>
- <%= @entry.content.html_safe %> 
-<%
-=end%>
-</p>
+<% if logged_in? %>
+  <div class="col">
+    <section>
+      <%= render 'shared/comment_form' %>
+    </section>
+  </div>
+<% end %>
+
+<% @comments.each do |comment| %>
+ <%= comment.user.name %>
+ <%= comment.content %>
+<% end %>

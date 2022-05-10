@@ -1,7 +1,15 @@
 <% provide(:title, @user.name) %>
-
 <div class="mb-3 w-75 mx-auto text-center">
   <h1><%= @user.name %></h1>
   <p><%= @user.email %></p>
   <p><%= @user.profile %></p>
+</div>
+
+<div class="col-md-8">
+  <% if @user.comments.any? %>
+    <h3>コメント (<%= @comments.count %>)</h3>
+    <ol class="comments">
+      <%= render partial: "comments/comment",  collection: @comments %>
+    </ol>
+  <% end %>
 </div>
