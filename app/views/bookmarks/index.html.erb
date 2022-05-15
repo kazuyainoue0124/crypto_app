@@ -1,0 +1,48 @@
+<% provide(:title, "ブックマーク") %>
+
+<h1>ブックマーク</h1>
+<% @bookmarks.each_slice(3) do |bookmark1, bookmark2, bookmark3| %>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <% if bookmark1 != nil %>
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to bookmark1.entry.title, bookmark1.entry %></h5>
+            <p class="card-text"><i>- <%= link_to bookmark1.entry.feed.name, bookmark1.entry.feed.url %> </i></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"><i> published <%= time_ago_in_words(bookmark1.entry.published) %> ago.</i></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col">
+      <% if bookmark2 != nil %>
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to bookmark2.entry.title, bookmark2.entry %></h5>
+            <p class="card-text"><i>-  <%= link_to bookmark2.entry.feed.name, bookmark2.entry.feed.url %> </i></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"><i> published <%= time_ago_in_words(bookmark2.entry.published) %> ago.</i></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col">
+      <% if bookmark3 != nil %>
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to bookmark3.entry.title, bookmark3.entry %></h5>
+            <p class="card-text"><i>-  <%= link_to bookmark3.entry.feed.name, bookmark3.entry.feed.url %> </i></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"><i> published <%= time_ago_in_words(bookmark3.entry.published) %> ago.</i></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -15,6 +15,9 @@
             <%= link_to "マイページ", '#', {class: "nav-link active"} %>
           </li>
           <li class="nav-item">
+            <%= link_to "ブックマーク", user_bookmarks_path(current_user), {class: "nav-link active"} %>
+          </li>
+          <li class="nav-item">
             <%= link_to "ユーザ一", users_path, class: "nav-link active" %>
           </li>
           <li class="nav-item dropdown">

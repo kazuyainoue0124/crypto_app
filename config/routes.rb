@@ -16,4 +16,12 @@ Rails.application.routes.draw do
   resources :entries do
     resources :comments, only: [:create]
   end
+
+  resources :entries do
+    resources :bookmarks, only: [:create, :destroy]
+  end
+
+  resources :users do
+    resources :bookmarks, only: [:index]
+  end
 end
