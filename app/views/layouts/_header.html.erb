@@ -12,7 +12,7 @@
             <%= link_to "ホーム", root_path, {class: "nav-link active"} %>
           </li>
           <li class="nav-item">
-            <%= link_to "マイページ", '#', {class: "nav-link active"} %>
+            <%= link_to "マイページ", current_user, {class: "nav-link active"} %>
           </li>
           <li class="nav-item">
             <%= link_to "ブックマーク", user_bookmarks_path(current_user), {class: "nav-link active"} %>
@@ -20,16 +20,8 @@
           <li class="nav-item">
             <%= link_to "ユーザ一", users_path, class: "nav-link active" %>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              アカウント
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><%= link_to "プロフィール", current_user, {class: "dropdown-item"} %></li>
-              <li><%= link_to "設定", edit_user_path(current_user), {class: "dropdown-item"} %></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><%= link_to "ログアウト", logout_path, class: "dropdown-item", method: :delete %></li>
-            </ul>
+          <li class="nav-item">
+            <%= link_to "ログアウト", logout_path, class: "nav-link active", method: :delete %>
           </li>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

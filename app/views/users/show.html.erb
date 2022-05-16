@@ -1,11 +1,14 @@
 <% provide(:title, @user.name) %>
 <div class="mb-3 w-75 mx-auto text-center">
   <h1><%= @user.name %></h1>
-  <p><%= @user.email %></p>
+  <section class="stats">
+    <%= render 'shared/stats' %>
+  </section>
   <p><%= @user.profile %></p>
 </div>
 
 <div class="col-md-8">
+  <%= render 'follow_form' if logged_in? %>
   <% if @user.comments.any? %>
     <h3>コメント (<%= @comments.count %>)</h3>
     <ol class="comments">
