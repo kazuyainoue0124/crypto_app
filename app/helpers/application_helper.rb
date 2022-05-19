@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Pagy::Frontend
 
   # ページ毎の完全なタイトルを返す
   def full_title(page_title = '')

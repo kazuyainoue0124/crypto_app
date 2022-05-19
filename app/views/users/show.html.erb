@@ -7,12 +7,70 @@
   <p><%= @user.profile %></p>
 </div>
 
-<div class="col-md-8">
   <%= render 'follow_form' if logged_in? %>
   <% if @user.comments.any? %>
     <h3>コメント (<%= @comments.count %>)</h3>
-    <ol class="comments">
-      <%= render partial: "comments/comment",  collection: @comments %>
-    </ol>
+    <% @comments.each_slice(3) do |comment1, comment2, comment3| %>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <% if comment1 != nil %>
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to comment1.entry.title, comment1.entry %></h5>
+                <p class="card-text"><i>- <%= link_to comment1.entry.feed.name, comment1.entry.feed.url %> </i></p>
+                <p class="card-text">
+                  <span class="user"><%= link_to comment1.user.name, comment1.user %></span>
+                  <span class="content"><%= comment1.content %></span>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted"><i> published <%= time_ago_in_words(comment1.entry.published) %> ago.</i></small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col">
+          <% if comment2 != nil %>
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to comment2.entry.title, comment2.entry %></h5>
+                <p class="card-text"><i>-  <%= link_to comment2.entry.feed.name, comment2.entry.feed.url %> </i></p>
+                <p class="card-text">
+                  <span class="user"><%= link_to comment2.user.name, comment2.user %></span>
+                  <span class="content"><%= comment2.content %></span>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted"><i> published <%= time_ago_in_words(comment2.entry.published) %> ago.</i></small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col">
+          <% if comment3 != nil %>
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to comment3.entry.title, comment3.entry %></h5>
+                <p class="card-text"><i>-  <%= link_to comment3.entry.feed.name, comment3.entry.feed.url %> </i></p>
+                <p class="card-text">
+                  <span class="user"><%= link_to comment3.user.name, comment3.user %></span>
+                  <span class="content"><%= comment3.content %></span>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted"><i> published <%= time_ago_in_words(comment3.entry.published) %> ago.</i></small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class="d-flex justify-content-center">
+  <% if @pagy != nil %>
+    <%== pagy_bootstrap_nav(@pagy) %>
   <% end %>
 </div>

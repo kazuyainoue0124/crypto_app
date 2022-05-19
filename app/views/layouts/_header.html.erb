@@ -6,8 +6,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if logged_in? %>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <%= link_to "ホーム", root_path, {class: "nav-link active"} %>
           </li>
@@ -23,19 +23,17 @@
           <li class="nav-item">
             <%= link_to "ログアウト", logout_path, class: "nav-link active", method: :delete %>
           </li>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">検索</button>
-          </form>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "ログイン", login_path, class: "btn btn-primary" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "新規登録", signup_path, class: "btn btn-primary" %>
-          </li>
-        <% end %>
         </ul>
+        <% else %>
+        <ul class="nav me-auto mb-2 mb-lg-0 justify-content-end">
+          <li class="nav-item">
+            <%= link_to "ログイン", login_path, class: "nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新規登録", signup_path, class: "nav-link active" %>
+          </li>
+        </ul>
+        <% end %>
       </div>
     </div>
   </nav>
