@@ -1,21 +1,34 @@
 <% provide(:title, @entry.title) %>
 
-<h3><%= link_to @entry.title, @entry.url %></h3>
-<i>published on <%= @entry.published %> </i>
-<% if @entry.bookmarked_by?(current_user) %>
-  <p><%= link_to "ブックマークを外す", entry_bookmark_path(@entry), method: :delete %></p>
-<% else %>
-  <p><%= link_to "ブックマーク", entry_bookmarks_path(@entry), method: :post %></p>
-<% end %>
+<div class="card text-center col-10 mx-auto">
+  <div class="card-header">
+    <i><%= link_to @entry.feed.name, @entry.feed.url %></i>
+  </div>
+  <div class="card-body">
+    <h3 class="card-title"><%= link_to @entry.title, @entry.url %></h3>
+    <p><%= link_to "続きを読む", @entry.url, class: "btn btn-primary" %></p>
+    <% if @entry.bookmarked_by?(current_user) %>
+      <span><%= link_to "ブックマークを外す", entry_bookmark_path(@entry), method: :delete %></span>
+    <% else %>
+      <span><%= link_to "ブックマーク", entry_bookmarks_path(@entry), method: :post %></span>
+    <% end %>
+  </div>
+  <div class="card-footer text-muted">
+    <i> published <%= time_ago_in_words(@entry.published) %> ago.</i>
+  </div>
+</div>
+
 <% if logged_in? %>
-  <div class="col">
+  <div class="col-6 mx-auto">
     <section>
       <%= render 'shared/comment_form' %>
+    </section>
+    <section>
+      <% @comments.each do |comment| %>
+        <p><%= link_to comment.user.name, comment.user %></p>
+        <p><%= comment.content %></p>
+      <% end %>
     </section>
   </div>
 <% end %>
 
-<% @comments.each do |comment| %>
- <%= comment.user.name %>
- <%= comment.content %>
-<% end %>

@@ -10,7 +10,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @comments = @user.comments
-    @entries = @comments.entries
+    @comments.each do |comment|
+      @pagy, @entries = pagy(Entry.where(id: comment.entry_id), items: 9)
+    end
+
   end
 
   def new

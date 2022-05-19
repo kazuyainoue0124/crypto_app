@@ -20,3 +20,4 @@ class EntriesController < ApplicationController
       @entries = Entry.all
     end
 end
+
