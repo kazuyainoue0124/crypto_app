@@ -1,6 +1,7 @@
 <% provide(:title, "ブックマーク") %>
-
-<h1>ブックマーク</h1>
+<div class="mb-3 w-75 mx-auto text-center">
+  <h1>ブックマーク</h1>
+</div>
 <% @bookmarks.each_slice(3) do |bookmark1, bookmark2, bookmark3| %>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">

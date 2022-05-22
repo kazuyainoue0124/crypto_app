@@ -85,3 +85,6 @@ gem 'whenever', require: false
 
 # ページネーション
 gem 'pagy'
+
+# Font Awesome
+gem 'font-awesome-rails'
