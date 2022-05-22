@@ -1,7 +1,7 @@
 <%= form_with(model: [@entry, Comment.new], local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "コメントを入力しましょう"  %>
+    <%= f.text_area :content, placeholder: "コメントを入力しましょう" %>
     <%= f.hidden_field :entry_id, value: @entry.id %>
   </div>
   <%= f.submit "投稿する", class: "btn btn-primary" %>
