@@ -28,7 +28,7 @@
 
 <% if logged_in? %>
   <div class="col-6 mx-auto">
-    <section>
+    <section class="comment-form">
       <%= render 'shared/comment_form' %>
     </section>
     <section>
@@ -37,6 +37,9 @@
         <p><%= comment.content %></p>
       <% end %>
     </section>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
   </div>
 <% end %>
 

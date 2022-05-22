@@ -7,7 +7,7 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
-    @comments = @entry.comments.all  # ここを修正すべき
+    @pagy,@comments = pagy(@entry.comments.all, items: 9)
 
   end
 
