@@ -1,13 +1,13 @@
 <% provide(:title, @user.name) %>
 <div class="mb-3 w-75 mx-auto text-center">
-  <h1><%= @user.name %></h1>
+  <h1 class="username"><%= @user.name %></h1>
+  <%= render 'follow_form' if logged_in? %>
   <section class="stats">
     <%= render 'shared/stats' %>
   </section>
   <p><%= @user.profile %></p>
 </div>
 
-  <%= render 'follow_form' if logged_in? %>
   <% if @user.comments.any? %>
     <h3>コメント (<%= @comments.count %>)</h3>
     <% @comments.each_slice(3) do |comment1, comment2, comment3| %>
