@@ -1,4 +1,8 @@
-<% provide(:title, @user.name) %>
+<% if current_user == @user %>
+  <% provide(:title, 'マイページ') %>
+<% else %>
+  <% provide(:title, @user.name) %>
+<% end %>
 <div class="mb-3 w-75 mx-auto text-center">
   <h1 class="username"><%= @user.name %></h1>
   <%= render 'follow_form' if logged_in? %>
