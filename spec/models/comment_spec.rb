@@ -12,4 +12,8 @@ RSpec.describe Comment, type: :model do
   it "entry_idが存在しない場合は登録できないこと" do
     expect(build(:comment, entry_id: nil)).not_to be_valid
   end
+
+  it "contentが存在しない場合は登録できないこと" do
+    expect(build(:comment, content: nil)).not_to be_valid
+  end
 end
