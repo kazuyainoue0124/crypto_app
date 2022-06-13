@@ -4,52 +4,35 @@ jobs:
     docker:
     - image: circleci/ruby:3.1.2-node
       environment:
-        RAILS_ENV: 'test'
-        MYSQL_HOST: 127.0.0.1
-        MYSQL_USERNAME: 'root'
-        MYSQL_PASSWORD: ''
-        MYSQL_PORT: 3306
+        RAILS_ENV: test
+        DATABASE_HOST: 127.0.0.1
     - image: circleci/mysql:8.0
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-        MYSQL_ROOT_HOST: '127.0.0.1'
+        MYSQL_ROOT_PASSWORD: ''
+        MYSQL_DATABASE: crypto_app_test
 
     working_directory: ~/crypto_app
 
     steps:
     - checkout
-
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "Gemfile.lock" }}
-        - v1-dependencies-
+    - run:
+        name: "bundle install"
+        command: bundle install --path vendor/bundle
 
     - run:
-        name: install dependencies
-        command: |
-          gem install bundler -v 2.3.7
-          bundle install --jobs=4 --retry=3 --path vendor/bundle
+        name: "waiting DB start"
+        command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
 
-    - save_cache:
-        paths:
-          - ./vendor/bundle
-        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-    # Database setup
-    - run: rm ./config/database.yml
-    - run: mv ./config/database.yml.ci ./config/database.yml
-
-    # Database setup
     - run:
-        name: Databasesetup
+        name: "initialize DB"
         command: |
           bundle exec rails db:create
-          bundle exec rails db:schema:load
+          bundle exec rails db:migrate
 
-    # run tests!
     - run:
         name: RSpec
-        command: bundle exec RSpec
+        command: bundle exec rspec
 
 workflows:
   version: 2
