@@ -1,41 +1,57 @@
-version: 2
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.2
+  node: circleci/node@2
+
+commands:
+  setup:
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+
 jobs:
   build:
     docker:
-    - image: circleci/ruby:3.1.2-node
-      environment:
-        RAILS_ENV: test
-        DATABASE_HOST: 127.0.0.1
-    - image: circleci/mysql:8.0
-      environment:
-        MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-        MYSQL_ROOT_PASSWORD: ''
-        MYSQL_DATABASE: crypto_app_test
-
-    working_directory: ~/crypto_app
-
+      - image: circleci/ruby:3.1.2-node
     steps:
-    - checkout
-    - run:
-        name: "bundle install"
-        command: bundle install --path vendor/bundle
-
-    - run:
-        name: "waiting DB start"
-        command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
-
-    - run:
-        name: "initialize DB"
-        command: |
-          bundle exec rails db:create
-          bundle exec rails db:migrate
-
-    - run:
-        name: RSpec
-        command: bundle exec rspec
+      - setup
+  test:
+    docker:
+      - image: circleci/ruby:3.1.2-node
+      - image: circleci/mysql:8.0
+        name: "db"
+        environment:
+          MYSQL_USER: root
+          MYSQL_DATABASE: crypto_app_test
+          MYSQL_ROOT_PASSWORD: ''
+    environment:
+      BUNDLE_JOBS: "4"
+      BUNDLE_RETRY: "3"
+      DATABASE_HOST: 127.0.0.1
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: ''
+      RAILS_ENV: test
+    steps:
+      - setup
+      - run:
+          name: rails db:migrate
+          command: bundle exec rails db:migrate
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      - run:
+          name: Rspec
+          command: bundle exec rspec
 
 workflows:
   version: 2
-  workflows:
+  test_and_deploy:
     jobs:
-      - test
+    - build
+    - test:
+        requires:
+          - build
