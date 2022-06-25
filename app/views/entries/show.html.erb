@@ -9,13 +9,13 @@
     <p><%= link_to "続きを読む", @entry.url, class: "btn btn-primary" %></p>
     <% if @entry.bookmarked_by?(current_user) %>
       <span>
-        <%= link_to entry_bookmark_path(@entry), method: :delete do %>
+        <%= link_to entry_bookmark_path(@entry), class: "favorite", method: :delete do %>
           <i class="fa fa-star fa-2x" aria-hidden="true"></i>
         <% end %>
       </span>
     <% else %>
       <span>
-        <%= link_to entry_bookmarks_path(@entry), method: :post do %>
+        <%= link_to entry_bookmarks_path(@entry), class: "unfavorite", method: :post do %>
           <i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
         <% end %>
       </span>
