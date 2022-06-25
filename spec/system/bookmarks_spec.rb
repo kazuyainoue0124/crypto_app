@@ -12,14 +12,14 @@ RSpec.describe "Bookmarks", type: :system do
       visit entry_path(@entry1)
 
       # entry1をブックマークする
-      find('.fa-star-o').click
-      expect(page).to have_selector '.fa-star'
+      find('.unfavorite').click
+      expect(page).to have_selector('.fa-star')
       expect(@user1.bookmarks.count).to eq(1)
       expect(@entry1.bookmarks.count).to eq(1)
-      
+
       # entry1をブックマーク解除する
-      find('.fa-star').click
-      expect(page).to have_selector '.fa-star-o'
+      find('.favorite').click
+      expect(page).to have_selector('.fa-star-o')
       expect(@user1.bookmarks.count).to eq(0)
       expect(@entry1.bookmarks.count).to eq(0)
     end
