@@ -1,58 +1,65 @@
-version: 2.1
-
-orbs:
-  ruby: circleci/ruby@3.1.2
-  node: circleci/node@14
-
-# setup
-commands:
-  setup:
-    steps:
-      - checkout
-      - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
-
+version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:3.1.2-node
-    steps:
-      - setup
-  test:
-    docker:
-      - image: circleci/ruby:3.1.2-node
-      - image: circleci/mysql:8.0
-        name: "db"
+      - image: circleci/ruby:3.1.2-node-browsers
         environment:
-          MYSQL_USER: mysql
-          MYSQL_DB: crypto_app_test
-          MYSWL_PASSWORD: ""
-    environment:
-      BUNDLE_JOBS: "4"
-      BUNDLE_RETRY: "3"
-      MYSQLHOST: 127.0.0.1
-      MYSQLUSER: postgres
-      MYSQLPASSWORD: ""
-      RAILS_ENV: test
-    steps:
-      - setup
-      - run:
-          name: rails db:migrate
-          command: bundle exec rails db:migrate
-      - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace
-      - run:
-          name: Rspec
-          command: bundle exec rspec
+          BUNDLER_VERSION: 2.3.7
+          RAILS_ENV: 'test'
+      - image: circleci/mysql:8.0
+        environment:
+          MySQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_HOST: '%'
 
-workflows:
-  version: 2
-  test_and_deploy:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+
+      - run:
+          name: install v1-dependencies
+          command: |
+            gem install bundler -v 2.3.7
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # database.ymlとdatabase.yml.ciを入れ替える
+      - run: mv config/database.yml.ci config/database.yml
+      # DBのセットアップ
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # rubocopを起動
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
+
+      # rspecを起動
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
