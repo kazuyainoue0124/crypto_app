@@ -21,7 +21,7 @@ development:
   database: crypto_app_development
   username: root
   password: password
-  host: db
+  host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
 
 test:
   <<: *default
