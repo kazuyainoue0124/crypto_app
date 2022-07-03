@@ -40,6 +40,9 @@ jobs:
           command: yarn install
       - run: bundle exec bin/webpack
       - run:
+          name: webpacker compile
+          command: bundle exec rails webpacker:compile
+      - run:
           name: Rspec
           command: bundle exec rspec
 
