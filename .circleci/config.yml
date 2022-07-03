@@ -52,9 +52,6 @@ jobs:
           version: 20.10.14
       - heroku/install
       - run:
-          name: webpacker compile
-          command: bundle exec rails webpacker:compile
-      - run:
           name: heroku login
           command: heroku container:login
       - run:
