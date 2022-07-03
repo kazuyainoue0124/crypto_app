@@ -40,9 +40,6 @@ jobs:
           command: yarn install
       - run: bundle exec bin/webpack
       - run:
-          name: webpacker compile
-          command: bundle exec rails webpacker:compile
-      - run:
           name: Rspec
           command: bundle exec rspec
 
@@ -63,6 +60,9 @@ jobs:
       - run:
           name: release docker image
           command: heroku container:release web -a $HEROKU_APP_NAME
+      - run:
+          name: webpacker compile
+          command: bundle exec rails webpacker:compile
       - run:
           name: database setup
           command: heroku run bundle exec rake db:migrate RAILS_ENV=production -a $HEROKU_APP_NAME
