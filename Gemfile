@@ -61,6 +61,12 @@ group :test do
   gem "rspec_junit_formatter"
 end
 
+group :production do
+  # https://rubygems.org/gems/unicorn | RubyGems
+  # 低遅延・高帯域の接続で高速なクライアントにサービスを提供できる UNIX ライクな HTTP サーバ
+  gem 'unicorn', '~> 6.0'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
