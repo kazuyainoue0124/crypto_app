@@ -30,15 +30,16 @@ test:
   password: password
   host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
 
-# production:
-#   <<: *default
-#   database: crypto_app_production
-#   username: crypto_app
-#   password: <%= ENV['CRYPTO_APP_DATABASE_PASSWORD'] %>
-
 production:
   <<: *default
   database: crypto_app_production
-  username: root
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  socket: /var/lib/mysql/mysql.sock
+  username: crypto_app
+  password: <%= ENV['CRYPTO_APP_DATABASE_PASSWORD'] %>
+
+# AWS実装用
+# production:
+#   <<: *default
+#   database: crypto_app_production
+#   username: root
+#   password: <%= ENV['DATABASE_PASSWORD'] %>
+#   socket: /var/lib/mysql/mysql.sock
